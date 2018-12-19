@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
     <script src="ejs.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
     <script src="cordova.js"></script>
@@ -41,7 +41,10 @@
             padding-right: 5px;
             color: rgb(0, 255, 213);
         }
-        
+        .button{
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
     </style>
 </head>
 
@@ -53,23 +56,19 @@
 
             <div style="text-align: center; margin-top: 30px;">
                 <p>
-                    <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                    <ons-input id="username" modifier="underbar" placeholder="Username" float onchange="login()"></ons-input>
                 </p>
                 <p>
-                    <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+                    <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float onchange="login()" ></ons-input>
                 </p>
 
                 <p>
-                    <ons-button  onclick="login()" style="background:#9370DB;">Sign in</ons-button> &nbsp; &nbsp; &nbsp; &nbsp;
-                    <a style href="register.html" >Regis </a>
+                    <ons-button  class="button"  onclick="login()"  style="background: #F2ED8C;">Sign in</ons-button> &nbsp; &nbsp; &nbsp; &nbsp;
+                     <ons-button   class="button" onclick="window.location.href='home1.html'"   style="background: #F2ED8C;">Back</ons-button>
                 </p>
             </div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <p style="margin-top: 30px;">
-                    <ons-button onclick="window.location.href='home1.html'"  style="background:#FF3366;">BACK</ons-button>
-                </p>
-            </div>
+            
 
 
     </ons-page>
@@ -141,7 +140,7 @@
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(error.code + ':' + error.message);
-            ons.notification.alert('LOgin Failed');
+            ons.notification.alert('Login Failed');
             // ...
         });
     };
@@ -151,7 +150,7 @@
         if (user) {
             // User is signed in.
             // Send user to home.html
-            window.location.href = 'home.html';
+            window.location.href = 'yumm.html';
         }
     });
 </script>

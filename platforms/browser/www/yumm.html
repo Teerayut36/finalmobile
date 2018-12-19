@@ -12,7 +12,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Poor+Story" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-  
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <script>
     // Initialize Firebase
     var config = {
@@ -32,21 +32,48 @@ db.settings({
 });
   </script>
 
-  <style>
-    *{
-      font-family: 'Poor Story', cursive;
-      font-family: 'Baloo Bhaijaan', cursive;
-   }
-    .toolbaricon {
-      padding-left: 5px;
-      padding-bottom: 5px;
-      padding-right: 5px;
-      color: rgb(204, 196, 181);
-    }
-  
+<style>
+   
+    
+  #appname {
+    font-size: 20px;
+    color: rgb(29, 29, 29)
+  }
+  #barup {
+    background-color:#F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #bardown {
+    background-color: #F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #textP {
+    color: brown;
+    font-size: 18px;
+  }
+  .toolbaricon {
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px; 
+    
+  }
+  * {
+    font-family: 'ABeeZee', sans-serif;
+    ;
+  }
+  .temback {
+    background-color: rgb(26, 26, 26);
+    background-repeat: rgb(29, 29, 29);
+    background-size: cover;
+  }
+  .button--large--cta{
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
+</style>
   
     
-  </style>
+ 
  
 </head>
 
@@ -67,9 +94,9 @@ db.settings({
         
           <ons-toolbar id="barup">
         
-            <div class="center" id="appname" style="position:center;">Report</div>
+            <div class="center" id="appname" style="position:center;">ยินดีตอนรับเข้าสุ่ PSU </div>
             <div class="right">
-              <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='home1.html'" style="position: relative;display: inline-block; margin-right:6%;">
+              <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='logout.html'" style="position: relative;display: inline-block; margin-right:6%;">
               </ons-icon>
               </a>
             </div>
@@ -85,7 +112,7 @@ db.settings({
               </ons-carousel>
              
                  <br><br>
-              <button class="button--large--cta" style="width: 95%; margin: 0 auto;" onclick="window.location.href='student.html'">ข้อมูลนักศึกษา</button>
+              <button class="button--large--cta" style="width: 95%; margin: 0 auto;background: #F2ED8C;"  onclick="window.location.href='student.html'">ข้อมูลนักศึกษา</button>
       </ons-page>
     </template>
   

@@ -5,14 +5,16 @@
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
   <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
   <script src="ejs.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Poor+Story" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-  
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
   <script>
     // Initialize Firebase
     var config = {
@@ -33,74 +35,98 @@ db.settings({
   </script>
 
   <style>
-    *{
-      font-family: 'Poor Story', cursive;
-      font-family: 'Baloo Bhaijaan', cursive;
-   }
-    .toolbaricon {
-      padding-left: 5px;
-      padding-bottom: 5px;
-      padding-right: 5px;
-      color: rgb(204, 196, 181);
-    }
-  
-  
+
+
+    #appname {
+    font-size: 20px;
+    color: rgb(29, 29, 29)
+  }
+  #barup {
+    background-color:#F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #bardown {
+    background-color: #F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #textP {
+    color: brown;
+    font-size: 18px;
+  }
+  .toolbaricon {
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px; 
     
-  </style>
- 
+  }
+  * {
+    font-family: 'ABeeZee', sans-serif;
+    ;
+  }
+  .temback {
+    background-color: rgb(26, 26, 26);
+    background-repeat: rgb(29, 29, 29);
+    background-size: cover;
+  }
+  .button--large--cta{
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
+  .button{
+    background-color: #F2ED8C;
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
+</style>
 </head>
 
 
 <body>
-  <ons-tabbar swipeable position="auto" id="tabbar"  >
-        <ons-tab page="tab3.html" style="background:rgb(255, 255, 255)" >
+  <ons-navigator swipeable id="myNavigator" page="tab3.html">
+    <ons-page>
+      <ons-tabbar swipeable position="auto" id="tabbar">
+        <ons-tab page="tab3.html" style="background:rgb(255, 255, 255)">
         </ons-tab>
 
         </ons-tab>
       </ons-tabbar>
     </ons-page>
-  
-    <template id="tab1.html">
-      <ons-page id="Tab1">
-        <div class="toolbar toolbar--material">
-    <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ยินดีต้อนรับ</h1>
-                 
+
+  </ons-navigator>
+
+
+
+
+  <template id="tab3.html">
+    <ons-page>
+      <ons-toolbar id="barup">
+
+        <div class="center" id="appname" style="position:center;">ข้อมูลป้ายทะเบียนรถ </div>
+        <div class="right">
+          <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='yumm.html'"
+            style="position: relative;display: inline-block; margin-right:6%;">
+          </ons-icon>
+          </a>
         </div>
-       
-      
-    </template>
-  
-   
-  
-  
-    <template id="tab3.html">
-      <ons-page>
-        <div class="toolbar toolbar--material">
-            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ยินดีต้อนรับ</h1>
-                         
-                </div>
-        <p style="text-align: center; margin-top: 10px;">
-            <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
-        </p> 
-        <div id="datacar"></div>
-        <script id="product_template" type="text/template"> 
-   <ons-row>
+      </ons-toolbar>
+
+      <p style="text-align: center; margin-top: 10px;">
+        <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
+      </p>
+      <div id="datacar"></div>
+      <script id="product_template" type="text/template">
+        <ons-row>
           <% datacar.forEach(function(datacar){
             var datacar = datacar.data();
             %>
-  <ons-list-header>Thumbnails and titles</ons-list-header>
+  
       <ons-list-item>
-        <div class="left">
-            <ons-card onclick="detail('<%- datacar.id %>')"  >
-          <img class="" src="<%= datacar.photo %>" width="99%" height="80px"><br>
-        </div>
-        <div class="center">
-          <span class="list-item__title">ป้ายทะเบียน : <%= datacar.Licenseplate %></span><span class="list-item__subtitle">ประเภทรถ :<%= datacar.category %></span>
-          <span class="list-item__subtitle">ID :<%= datacar.id %></span><span class="list-item__subtitle">ชื่อ :<%= datacar.name %></span>
-          <span class="list-item__subtitle">รหัสนักศึกษา :<%= datacar.sid %></span>
-          <span class="list-item__subtitle">สาขา: <%= datacar.Major %></span><span class="list-item__subtitle">ยี่ห้อรถ : <%= datacar.brand %></span>
+      
+        <div onclick="detail('<%- datacar.Licenseplate %>')">
+          <span class="list-item__title">ป้ายทะเบียน : <%= datacar.Licenseplate %></span>
          
         </div>
+      </ons-list-item>
       </ons-list-item>
   
   
@@ -109,43 +135,92 @@ db.settings({
    
   
   </Script>
-        </div>
-  
-      </ons-page>
-    </template>
-  
-  
-   
-  </body>
-  <script>
-    getproductData()
+      </div>
 
-    tatol();
-    document.addEventListener('prechange', function (event) {
-      if (event.index == 0) {
-        console.log('Home click');
-        getHomeData()
-      }
-      else if (event.index == 1) {
-        console.log('Cart click');
-        getData2cart()
-      }
-      else if (event.index == 2) {
-        console.log('Cart click');
-        var name = localStorage.getItem('name');
-        var items = localStorage.getItem('items');
-        if (name == null&&items==null) {
-          getproductData()
-        }
-        else if (name != null&&items==null){ getproductData(name) }
-        else if (name != null&&items==null){  }
-      }else if (event.index == 3) {
-        var title = localStorage.getItem('title');
-        console.log('Cart click');
-        // test(title)
-      }localStorage.clear();
-    });
+    </ons-page>
+  </template>
+
+  <template id="tab4.html">
+    <ons-page>
+        <ons-toolbar id="barup">
+
+            <div class="center" id="appname" style="position:center;">ข้อมูลนักศึกษา PSU </div>
+            <div class="right">
+              <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='yumm.html'"
+                style="position: relative;display: inline-block; margin-right:6%;">
+              </ons-icon>
+              </a>
+            </div>
+          </ons-toolbar>
+
+      <div id="datacars"></div>
+      <script id="product_templates" type="text/template">
+        <ons-row>
+            <% datacar.forEach(function(datacar){
+              var datacar = datacar.data();
+              %>
     
+        <ons-list-item>
+          <div class="left">
+              <ons-card   >
+            <img class="" src="<%= datacar.photo %>" width="99%" height="80px"><br>
+          </div>
+          <div class="center">
+            <span class="list-item__title">ป้ายทะเบียน : <%= datacar.Licenseplate %></span><span class="list-item__subtitle">ประเภทรถ :<%= datacar.category %></span>
+           
+            <span class="list-item__subtitle">ID :<%= datacar.id %></span><span class="list-item__subtitle">ชื่อ :<%= datacar.name %></span>
+            <span class="list-item__subtitle">รหัสนักศึกษา :<%= datacar.sid %></span>
+            <span class="list-item__subtitle">สาขา: <%= datacar.Major %></span><span class="list-item__subtitle">ยี่ห้อรถ : <%= datacar.brand %></span>
+           
+          </div><br>
+        </ons-list-item>
+       
+    
+     </ons-row>
+     <br>
+      <div class="center">
+          <ons-button class ="button" modifier="large" onclick="come('<%= datacar.name %>','<%= datacar.Licenseplate %>','<%= datacar.sid %>')">ขาเข้า</ons-button> <br>
+          <ons-button  class ="button" modifier="large" onclick="out('<%= datacar.name %>','<%= datacar.Licenseplate %>','<%= datacar.sid %>')">ขาออก</ons-button> <br>
+          <ons-button  class ="button" modifier="large" onclick="remove('<%= datacar.name %>','<%= datacar.Licenseplate %>','<%= datacar.sid %>')">ทำผิดกฎระเบียบ</ons-button> <br>
+         
+        </div>
+    <%});%> 
+    </Script>
+      </div>
+
+    </ons-page>
+  </template>
+
+
+</body>
+<script>
+  getproductData()
+
+  tatol();
+  document.addEventListener('prechange', function (event) {
+    if (event.index == 0) {
+      console.log('Home click');
+      getHomeData()
+    } else if (event.index == 1) {
+      console.log('Cart click');
+      getData2cart()
+    } else if (event.index == 2) {
+      console.log('Cart click');
+      var name = localStorage.getItem('name');
+      var items = localStorage.getItem('items');
+      if (name == null && items == null) {
+        getproductData()
+      } else if (name != null && items == null) {
+        getproductData(name)
+      } else if (name != null && items == null) {}
+    } else if (event.index == 3) {
+      var title = localStorage.getItem('title');
+      console.log('Cart click');
+      // test(title)
+    }
+    localStorage.clear();
+  });
+
   //   function getCartData() {
   //     var docRef = db.collection("/UI").doc("cart");
   // docRef.get().then(function (doc) {
@@ -163,7 +238,11 @@ db.settings({
   //   console.log("Error getting document:", error);
   // });
   //  }
-   function getproductData(name) {
+  function getproductData(name) {
+    var code = localStorage.getItem('code');
+    if (code != null) {
+      detail(code)
+    } else {
       console.log(name);
       if (name == null) {
         db.collection("DATACAR").get()
@@ -171,15 +250,18 @@ db.settings({
             // doc.data() is never undefined for query doc snapshots
             var product_template = $('#product_template').html();
             console.log(querySnapshot.docs);
-            var html = ejs.render(product_template, { datacar: querySnapshot.docs });
+            var html = ejs.render(product_template, {
+              datacar: querySnapshot.docs
+            });
             $('#datacar').html(html);
           })
           .catch(function (error) {
             console.log("Error getting documents: ", error);
           });
       } else {
-        db.collection("DATACAR").where("category", "==",name).get()
-          .then(function (querySnapshot) {console.log(querySnapshot.docs);
+        db.collection("DATACAR").where("category", "==", name).get()
+          .then(function (querySnapshot) {
+            console.log(querySnapshot.docs);
             if (querySnapshot.docs.length == 0) {
               var html = "ไม่มีสินค้าที่คุณเลือก"
               db.collection("DATACAR").get()
@@ -187,7 +269,9 @@ db.settings({
                   // doc.data() is never undefined for query doc snapshots
                   var product_template = $('#product_template').html();
                   console.log(querySnapshot.docs);
-                  html += ejs.render(product_template, { datacar: querySnapshot.docs });
+                  html += ejs.render(product_template, {
+                    datacar: querySnapshot.docs
+                  });
                   $('#datacar').html(html);
                 })
                 .catch(function (error) {
@@ -199,89 +283,167 @@ db.settings({
                   // doc.data() is never undefined for query doc snapshots
                   console.log(querySnapshot.docs);
                   var product_template = $('#product_template').html();
-                  var html = ejs.render(product_template, { datacar: querySnapshot.docs });
+                  var html = ejs.render(product_template, {
+                    datacar: querySnapshot.docs
+                  });
                   $('#datacar').html(html);
                 })
                 .catch(function (error) {
                   console.log("Error getting documents: ", error);
                 });
             }
-          
+
           })
       }
     }
-    function changeTab(name) {
-      console.log(name)
-      document.getElementById('tabbar').setActiveTab(2);
-      localStorage.setItem('name', name);
-      
-    }
-      
-  // function detail(pid) {
-  //     localStorage.setItem('id', pid);
-  //     myNavigator.pushPage('tab4.html');
-  //     showdetail()
-      
-  //   }
-  //   function showdetail() {
-  //     var id = localStorage.getItem('id');
-  //     db.collection("PRODUCTS").where("pid", "==", id).get()
-  //       .then(function (querySnapshot) {
-  //         // doc.data() is never undefined for query doc snapshots
-  //         console.log(querySnapshot.docs);
-  //         var detail_template = $('#detail_template').html();
-  //         var html = ejs.render(detail_template, { detail: querySnapshot.docs });
-  //         $('#detail').html(html);
-  //       })
-  //       .catch(function (error) {
-  //         console.log("Error getting documents: ", error);
-  //       });
-  //     localStorage.clear();
-  //   }
-  // ///// search
-    function search(search) {
-        console.log("xxx",search)
-     const filterItems = (needle, heystack) => {
+  }
+
+  function changeTab(name) {
+    console.log(name)
+    document.getElementById('tabbar').setActiveTab(2);
+    localStorage.setItem('name', name);
+
+  }
+
+  function detail(pid) {
+    //localStorage.setItem('id', pid);
+    myNavigator.pushPage('tab4.html');
+    showdetail(pid)
+
+  }
+
+  function showdetail(pid) {
+
+    //var idd = localStorage.getItem('id');
+    var id = pid
+    db.collection("DATACAR").where("Licenseplate", "==", id).get()
+      .then(function (querySnapshot) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(querySnapshot.docs);
+        var product_templates = $('#product_templates').html();
+        var html = ejs.render(product_templates, {
+          datacar: querySnapshot.docs
+        });
+        $('#datacars').html(html);
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+    localStorage.clear();
+  }
+  ///// search
+  function search(search) {
+    console.log("xxx", search)
+    const filterItems = (needle, heystack) => {
       let query = needle.toLowerCase();
-      return heystack.filter(item => item.data().name.toLowerCase().indexOf(needle) >= 0);
+      return heystack.filter(item => item.data().Licenseplate.toLowerCase().indexOf(needle) >= 0);
     }
     console.log("55+", filterItems(search, data));
-    var item=filterItems(search, data);
-  //  console.log("xxx",item.data)
+    var item = filterItems(search, data);
+    //  console.log("xxx",item.data)
     localStorage.setItem('items', item);
-    
-    
-  test(item);
- // document.getElementById('tabbar').setActiveTab(2);
-      // localStorage.setItem('title', item);
-    }
-    const data = []
-    function tatol() {
-      //console.log(search);
-      db.collection("DATACAR").get()
-        .then(function (querySnapshot) {
-          querySnapshot.docs.forEach(function (item) {
-            data.push(item)
-            console.log(data)
+
+
+    test(item);
+    // document.getElementById('tabbar').setActiveTab(2);
+    // localStorage.setItem('title', item);
+  }
+  const data = []
+
+  function tatol() {
+    //console.log(search);
+    db.collection("DATACAR").get()
+      .then(function (querySnapshot) {
+        querySnapshot.docs.forEach(function (item) {
+          data.push(item)
+          console.log(data)
+        });
+
+      })
+    // const fruits = data[1];
+  }
+
+  function test(title) {
+
+    console.log("tt", title);
+    // for(var i =0;i<tests.length;i++){
+
+
+    console.log('tset', title);
+
+
+    var product_template = $('#product_template').html();
+    var html = ejs.render(product_template, {
+      datacar: title
+    });
+    $('#datacar').html(html);
+
+  }
+
+  function come(name, lastname, carnumber) {
+    ons.notification.alert('ส่งแล้ว');
+    var d = new Date();
+    var dd = JSON.stringify(d)
+    console.log(d);
+
+    db.collection("come").add({
+        date: dd,
+        name: name,
+        Licenseplate: lastname,
+        sid: carnumber
+      })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  }
+
+  function out(name, lastname, carnumber) {
+    ons.notification.alert('ส่งแล้ว');
+    var d = new Date();
+    var dd = JSON.stringify(d)
+    db.collection("out").add({
+        date: dd,
+        name: name,
+        Licenseplate: lastname,
+        sid: carnumber
+      })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  }
+
+  function remove(name, lastname, carnumber) {
+    ons.notification.prompt('Prompt!')
+      .then(function (input) {
+        var message = input ? 'หมายเหตุ: ' + input : 'Entered nothing!';
+
+        var d = new Date();
+        var dd = JSON.stringify(d)
+        db.collection("rule").add({
+            date: dd,
+            name: name,
+            Licenseplate: lastname,
+            sid: carnumber,
+            message: message
+          })
+          .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function (error) {
+            console.error("Error adding document: ", error);
           });
-          
-        })
-      // const fruits = data[1];
-    }
-    function test(title){
-      
-  console.log("tt",title);
-  // for(var i =0;i<tests.length;i++){
-      
-   
-      console.log('tset',title);
-         
-          
-          var product_template = $('#product_template').html();
-           var html = ejs.render(product_template, { datacar: title });
-          $('#datacar').html(html);
-    
-   }
+
+
+
+      });
+
+  }
   //  var dataCart = [];
   // function addtocart(add2cart){
   //   localStorage.clear('quentinTarantino');
@@ -292,7 +454,7 @@ db.settings({
   // ons.notification.alert('Add product ' + retrievedData + ' from the basket!');
   // }
   // function getData2cart(){
-    
+
   //   var Delete=[]
   //   document.getElementById('pic').innerHTML=""
   //   console.log(dataCart);
@@ -310,18 +472,19 @@ db.settings({
   //       var pic_template = $('#pic_template').html();
   //       var  html = ejs.render(pic_template, { cart: querySnapshot.docs,num:testnum });
   //       console.log(html);
-       
-        
+
+
   //      $('#pic').append(html);
   //         testnum = testnum +1;
   //     })  
   //   })
-   
+
   // }
   // function deleted(Cartitem) {
   //         var deleted = dataCart.splice(Cartitem, 1);
   //         ons.notification.alert('Remove the ' + deleted + ' from the basket!');
   //         getData2cart();
   //     }
-  </script>
+</script>
+
 </html>

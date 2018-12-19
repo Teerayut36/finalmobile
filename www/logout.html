@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
   <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-  
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <script src="ejs.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
@@ -43,6 +43,10 @@
       padding-right: 5px;
       color: orange;
     }
+    .button{
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
   </style>
 </head>
 
@@ -51,7 +55,7 @@
     <ons-page>
         <div style="text-align: center; margin-top: 30px;">
              <p style="margin-top: 30px;">
-                <ons-button onclick="logout()">Sign Out</ons-button>
+                <ons-button  class="button" onclick="logout()" style="background: #F2ED8C;">Sign Out</ons-button>
             </p>
         </div>
     </ons-page>

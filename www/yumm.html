@@ -12,7 +12,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Poor+Story" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-  
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <script>
     // Initialize Firebase
     var config = {
@@ -32,21 +32,48 @@ db.settings({
 });
   </script>
 
-  <style>
-    *{
-      font-family: 'Poor Story', cursive;
-      font-family: 'Baloo Bhaijaan', cursive;
-   }
-    .toolbaricon {
-      padding-left: 5px;
-      padding-bottom: 5px;
-      padding-right: 5px;
-      color: rgb(204, 196, 181);
-    }
-  
+<style>
+   
+    
+  #appname {
+    font-size: 20px;
+    color: rgb(29, 29, 29)
+  }
+  #barup {
+    background-color:#F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #bardown {
+    background-color: #F2ED8C;
+    font-family: 'Kanit', sans-serif;
+  }
+  #textP {
+    color: brown;
+    font-size: 18px;
+  }
+  .toolbaricon {
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px; 
+    
+  }
+  * {
+    font-family: 'ABeeZee', sans-serif;
+    ;
+  }
+  .temback {
+    background-color: rgb(26, 26, 26);
+    background-repeat: rgb(29, 29, 29);
+    background-size: cover;
+  }
+  .button--large--cta{
+    color: rgb(29, 29, 29);
+    font-family: 'Kanit', sans-serif;
+  }
+</style>
   
     
-  </style>
+ 
  
 </head>
 
@@ -55,10 +82,7 @@ db.settings({
   <ons-tabbar swipeable position="auto" id="tabbar"  >
         <ons-tab page="tab1.html" style="background:rgb(255, 255, 255)" >
         </ons-tab>
-        <ons-tab page="tab2.html" style="background:rgb(255, 255, 255)" >
-        </ons-tab>
-        <ons-tab page="tab3.html"  style="background:rgb(255, 255, 255)" >
-        </ons-tab>
+        
       </ons-tabbar>
     </ons-page>
   
@@ -69,7 +93,7 @@ db.settings({
         
             <div class="center" id="appname" style="position:center;">ยินดีตอนรับเข้าสุ่ PSU </div>
             <div class="right">
-              <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='home1.html'" style="position: relative;display: inline-block; margin-right:6%;">
+              <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='logout.html'" style="position: relative;display: inline-block; margin-right:6%;">
               </ons-icon>
               </a>
             </div>
@@ -85,11 +109,11 @@ db.settings({
               </ons-carousel>
              
                  <br><br>
-              <button class="button--large--cta" style="width: 95%; margin: 0 auto;" onclick="window.location.href='student.html'">ข้อมูลนักศึกษา</button>
+              <button class="button--large--cta" style="width: 95%; margin: 0 auto;background: #F2ED8C;"  onclick="window.location.href='student.html'">ข้อมูลป้ายทะเบียน</button>
       </ons-page>
     </template>
   
-    <template id="tab2.html">
+    <!-- <template id="tab2.html">
       <ons-page id="Tab2">
         <ons-list-header>SHOPPING CART</ons-list-header>
   
@@ -158,7 +182,7 @@ db.settings({
         </div>
   
       </ons-page>
-    </template>
+    </template> -->
   
   
     <template id="tab4.html">
@@ -365,35 +389,35 @@ db.settings({
   //     localStorage.clear();
   //   }
   // ///// search
-    function search(search) {
+  //   function search(search) {
      
-     const filterItems = (needle, heystack) => {
-      let query = needle.toLowerCase();
-      return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
-    }
-    console.log("55+", filterItems(search, data));
-    var item=filterItems(search, data);
-    console.log("xxx",item)
-    localStorage.setItem('items', item);
+  //    const filterItems = (needle, heystack) => {
+  //     let query = needle.toLowerCase();
+  //     return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
+  //   }
+  //   console.log("55+", filterItems(search, data));
+  //   var item=filterItems(search, data);
+  //   console.log("xxx",item)
+  //   localStorage.setItem('items', item);
     
     
-  test(item);
-  document.getElementById('tabbar').setActiveTab(2);
-      // localStorage.setItem('title', item);
-    }
-    const data = []
-    function tatol() {
-      console.log(search);
-      db.collection("PRODUCTS").get()
-        .then(function (querySnapshot) {
-          querySnapshot.docs.forEach(function (item) {
-            data.push(item)
-            console.log(data)
-          });
+  // test(item);
+  // document.getElementById('tabbar').setActiveTab(2);
+  //     // localStorage.setItem('title', item);
+  //   }
+  //   const data = []
+  //   function tatol() {
+  //     console.log(search);
+  //     db.collection("PRODUCTS").get()
+  //       .then(function (querySnapshot) {
+  //         querySnapshot.docs.forEach(function (item) {
+  //           data.push(item)
+  //           console.log(data)
+  //         });
           
-        })
-      // const fruits = data[1];
-    }
+  //       })
+  //     // const fruits = data[1];
+  //   }
     function test(title){
       
   console.log("tt",title);

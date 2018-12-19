@@ -54,189 +54,27 @@ db.settings({
 <body>
   
   
-    <template id="tab1.html">
-      <ons-page id="Tab1">
-        <div class="toolbar toolbar--material">
-          <div class="toolbar__left toolbar--material__left">
-            <span class="toolbar-button toolbar-button--material">
-              <i class="zmdi zmdi-menu"></i>
-            </span>
-          </div>
-          <div class="toolbar__center toolbar--material__center">
-            Title
-          </div>
-          <div class="toolbar__right toolbar--material__right">
-            <span class="toolbar-button toolbar-button--material">
-              <i class="zmdi zmdi-search" onchange="search(this.value)"></i>
-            </span>
-            <span class="toolbar-button toolbar-button--material">
-              <i class="zmdi zmdi-favorite"></i>
-            </span>
-            <span class="toolbar-button toolbar-button--material">
-              <i class="zmdi zmdi-more-vert" onclick="window.location.href='logout.html'"></i>
-            </span>
-          </div>
-        </div>
+  <template id="tab1.html">
+    <ons-page id="Tab1">
+      <div class="toolbar toolbar--material">
+  <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ยินดีต้อนรับ</h1>
+               
+      </div>
+     <br><br>
+
+           
+               <br><br>
+            <button class="button--large--cta" style="width: 95%; margin: 0 auto;" onclick="window.location.href='student.html'">ขาเข้า</button><br>
+            <button class="button--large--cta" style="width: 95%; margin: 0 auto;" onclick="window.location.href='student.html'">ขาออก</button><br>
+            <button class="button--large--cta" style="width: 95%; margin: 0 auto;" onclick="window.location.href='student.html'">ทำผิด</button><br><br>
+    </ons-page>
+  </template>
   
-        <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
-          <ons-carousel-item id="carousel1" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
-          </ons-carousel-item>
-          <ons-carousel-item id="carousel2" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
-          </ons-carousel-item>
-          <ons-carousel-item id="carousel3" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
-          </ons-carousel-item>
-        </ons-carousel>
-  
-       
-  
-            <div id="icon"></div>
-            <script id="icon_template" type="text/template">
-              <ons-row style="height:120px" vertical-align="center">  
-              <% categories.forEach(function(category){%> 
-          
-              <ons-col style="border:solid 3px black; border-bottom: 5px solid rgb(0, 10, 20); border-radius: 10px; background-color: Goldenrod;" width="100%"  onclick="changeTab('<%= category.name %>')">
-                <p  style="text-align: center; margin: 10px; color:black;">
-                  <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
-                </p>
-                <p style="text-align: center; margin: 10px; color:black;" id="icon1_text">
-                  <%= category.name %>
-                </p>
-              </ons-col>
-              
-              <%});%>
-              </ons-row>
-              </script>
-                        
-                       
+    
   
   
-      </ons-page>
-    </template>
   
-    <template id="tab2.html">
-      <ons-page id="Tab2">
-        <ons-list-header>SHOPPING CART</ons-list-header>
-  
-        <div id="pic"></div>
-          <script id="pic_template" type="text/template"> 
-                      <% cart.forEach(function(cart){
-                        var cart=cart.data()
-                        %>
-              <ons-list-item>
-                  <div class="left">
-                      <img class="list-item__thumbnail" src="<%= cart.photo[0] %>">
-                  </div>
-                  <div class="center">
-                      <span class="list-item__title"><%= cart.itemname %></span>
-                      <span class="list-item__subtitle" style="color: blue;"><%= cart.price %></span>
-                  </div>
-                  <div class="right">
-  
-                      <ons-icon icon="md-delete" onclick="deleted(<%num%>)"></ons-icon>
-                      <div class="right">
-                        
-                    </div>
-                      
-              </ons-list-item><%});%> 
-  
-          </Script>
-        </div>
-  
-  
-        <ons-button modifier="large">PROCEED TO PAY</ons-button>
-  
-      </ons-page>
-    </template>
-  
-  
-    <template id="tab3.html">
-      <ons-page>
-  
-        <p style="text-align: center; margin-top: 10px;">
-          <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
-      </p> 
-        <div id="datacar"></div>
-        <script id="product_template" type="text/template"> 
-   <ons-row>
-          <% datacar.forEach(function(datacar){
-            var datacar = datacar.data();
-            %>
-  <ons-list-header>Thumbnails and titles</ons-list-header>
-      <ons-list-item>
-        <div class="left">
-            <ons-card onclick="detail('<%- datacar.id %>')"  >
-          <img class="" src="<%= datacar.photo %>" width="99%" height="80px"><br>
-        </div>
-        <div class="center">
-          <span class="list-item__title">ป้ายทะเบียน : <%= datacar.Licenseplate %></span><span class="list-item__subtitle">ประเภทรถ :<%= datacar.category %></span>
-          <span class="list-item__subtitle">ID :<%= datacar.id %></span><span class="list-item__subtitle">ชื่อ :<%= datacar.name %></span>
-          <span class="list-item__subtitle">รหัสนักศึกษา :<%= datacar.sid %></span>
-          <span class="list-item__subtitle">สาขา: <%= datacar.Major %></span><span class="list-item__subtitle">ยี่ห้อรถ : <%= datacar.brand %></span>
-         
-        </div>
-      </ons-list-item>
-  
-  
-  <%});%> 
-   </ons-row>
-   
-  
-  </Script>
-        </div>
-  
-      </ons-page>
-    </template>
-  
-  
-    <template id="tab4.html">
-        <ons-page>
-          <ons-toolbar>
-            <div class="left">
-              <button onclick="window.location.href='home.html'">BACK</button>
-            </div>
-            <div class="center"></div>
-          </ons-toolbar>
-          <div id="detail"></div>
-          <script id="detail_template" type="text/template"> 
-           <ons-card>
-             
-             <% detail.forEach(function(datacar){   
-              var datacar = datacar.data();
-              console.log(datacar)
-              %>
-         
-              <div class="content">
-                <img src=" <%= datacar.photo%>" alt=""height="60px"width="80%">
-                <div>
-              <div class="title">
-                  <P>NumberID :  <%= datacar.id%></P>
-              
-              </div>
-  
-              <div class="content">
-                  <P>Price :<%= datacar.name %></P>
-                <div>
-                  
-                </div>
-                
-                <div class="content">
-                  <div>
-                    <P>Description : <%= datacar.sid %></P>
-                  </div>
-                <ons-list>
-                  
-                 
-              </div>
-              <center> <ons-button style="border:solid 3px black; border-bottom: 5px solid rgb(0, 10, 20); border-radius: 10px; background-color: Goldenrod;" width="300px" hight="50px" onclick="addtocart('<%= datacar.pid %>')">เข้า</ons-button></center>
-              <center> <ons-button style="border:solid 3px black; border-bottom: 5px solid rgb(0, 10, 20); border-radius: 10px; background-color: Goldenrod;" width="300px" hight="50px" onclick="addtocart('<%= datacar.pid %>')">ออก</ons-button></center>
-              <center> <ons-button style="border:solid 3px black; border-bottom: 5px solid rgb(0, 10, 20); border-radius: 10px; background-color: Goldenrod;" width="300px" hight="50px" onclick="addtocart('<%= datacar.pid %>')">ทำผิด</ons-button></center>
-              <%})%>
-            </ons-card>
-         
-        
-        </Script>
-        </ons-page>
-      </template>
+    
       <ons-navigator swipeable id="myNavigator" >
 
           <ons-tabbar swipeable position="auto" id="tabbar"  >

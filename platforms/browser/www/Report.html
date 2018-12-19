@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+        <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="ejs.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Poor+Story" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyCV-3dvAUevSse70YnxA0q53R_Ksd_MVTU",
+    authDomain: "motorbike-39f30.firebaseapp.com",
+    databaseURL: "https://motorbike-39f30.firebaseio.com",
+    projectId: "motorbike-39f30",
+    storageBucket: "motorbike-39f30.appspot.com",
+    messagingSenderId: "1064933064524"
+  };
+    firebase.initializeApp(config);
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+    // Disable deprecated features
+    db.settings({
+      timestampsInSnapshots: true
+    });
+  </script>
+  <style>
+    #appname {
+      font-size: 20px;
+      color: rgb(0, 132, 255);
+    }
+    #barup {
+      background-color: rgb(0, 0, 0);
+    }
+    #bardown {
+      background-color: rgb(0, 0, 0);
+    }
+    #textP {
+      color: brown;
+      font-size: 18px;
+    }
+    .toolbaricon {
+      padding-left: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      color: rgb(0, 132, 255);
+    }
+    * {
+      font-family: 'ABeeZee', sans-serif;
+    }
+    .temback {
+      background-color: rgb(26, 26, 26);
+      background-repeat: rgb(29, 29, 29);
+      background-size: cover;
+    }
+  </style>
+</head>
+
+
+<body>
+  <ons-navigator swipeable id="myNavigator">
+    <ons-page>
+      <ons-toolbar id="barup">
+        
+        <div class="center" id="appname" style="position:center;">Report</div>
+        <div class="right">
+          <ons-icon class="toolbaricon" size="30px" icon="fa-sign-out-alt" onclick="window.location.href='home1.html'" style="position: relative;display: inline-block; margin-right:6%;">
+          </ons-icon>
+          </a>
+        </div>
+      </ons-toolbar>
+
+      <ons-tabbar swipeable position="auto" id="tabslide">
+        <ons-tab id="bardown" page="tab1.html" label="ขาเข้า" icon="shipping-fast, material:md-home" active>
+        </ons-tab>
+        <ons-tab class="alertcart" id="bardown" page="tab2.html" label="ขาออก" icon="fa-shopping-basket" badge="" active-icon="fa-shopping-basket">
+        </ons-tab>
+        <ons-tab id="bardown" page="tab3.html" label="ทำผิด" icon="fa-cart-plus" active-icon="fa-cart-plus">
+        </ons-tab>
+      </ons-tabbar>
+    </ons-page>
+  </ons-navigator>
+
+  <template id="tab1.html">
+    <ons-page class="temback" id="Tab1">
+
+   
+    </ons-page>
+  </template>
+
+  <template id="tab2.html">
+    <ons-page class="temback" id="Tab2">
+      <ons-list-header>
+        
+      </ons-list-header>
+      <ons-list>
+        <div id="showDataCart"></div>
+        <div id="showprice" style="color: rgb(38, 255, 0);"></div>
+        <script id="cart_template" type="text/template">
+        
+      <% cartData.forEach(function(cartData){
+          var cartData = cartData.data(); 
+        %>
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="<%= cartData.pic %>">
+          </div>
+          
+          <div class="right">
+            <p style="text-align: center; margin: 10px;">
+                <ons-button onclick="showAlert()">
+              <ons-icon style="color: skyblue" size="30px" icon="md-delete" onclick="delitem(<%=numitem%>); delprice('<%= cartData.price %>');"></ons-icon>
+            </ons-button> 
+          </p>
+          </div>
+        </ons-list-item>    
+      <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+    <div class="alert-dialog-title">Please Confirm</div>
+    <div class="alert-dialog-content">
+    
+    </script>
+
+      </ons-list>
+      
+
+    </ons-page>
+
+  </template>
+
+  <template id="alert-dialog.html">
+    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-content">
+        This dialog was created from a template
+      </div>
+      <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="hideAlertDialog()">Cancel</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
+      </div>
+    </ons-alert-dialog>
+  </template>
+
+  <template id="tab3.html">
+    <ons-page id="Tab3" class="temback">
+      
+      <hr>
+      
+      <script id="allP_template" type="text/template">
+       <ons-row>
+  
+      
+      <ons-col width="50%" style="border:solid 3px white; border-radius: 10px; background-color: lightgrey;" onclick="getproDetail('<%= item.title %>');"> 
+       
+      </ons-col>
+      
+      
+    </script>
+
+      </ons-row>
+      
+
+    </ons-page>
+  </template>
+
+  <template id="detailP.html">
+    <ons-page class="temback">
+      <script>
+        var datadep = localStorage.getItem('getDep');
+        console.log(datadep)
+      </script>
+      <ons-toolbar id="bardown">
+        <div class="left">
+          <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center" id="appname">
+
+          <b>&nbsp;Details Product</b>
+
+        </div>
+      </ons-toolbar>
+      <div id="showDep"></div>
+
+      <script id="Detailproduct_template" type="text/template">
+          <ons-card style="border:solid 5px lightgrey; border-radius: 10px; border-bottom: 10px solid rgb(0, 132, 255);">
+              
+              <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+                <% dataDep.forEach(function(dataDep){   
+                  var data = dataDep.data(); %>
+                    <ons-carousel-item id="carousel1DeP" style="background: url('<%=data.pic%>') no-repeat center; background-size: contain;">
+                    </ons-carousel-item>
+                    <ons-carousel-item id="carousel1DeP" style="background: url('<%=data.pic%>') no-repeat center; background-size: contain;">
+                      </ons-carousel-item>
+                    <ons-carousel-item id="carousel1DeP" style="background: url('<%=data.pic%>') no-repeat center; background-size: contain;">
+                        </ons-carousel-item>
+      
+             </ons-carousel>
+                <ons-list>
+                  <ons-list-header>Title: <%= data.title %></ons-list-header>
+                  <ons-list-item>Prise: <%= data.price %> ฿</ons-list-item>
+                  <ons-list-item>Category: <%= data.category %></ons-list-item>
+                </ons-list>
+              </div>
+              <br>
+            <center><ons-button onclick="addprotocart('<%= data.title %>'); totalprice('<%= data.price %>');">ADD TO CART</ons-button></center>
+              <%})%>
+            </ons-card>
+            
+       </script>
+
+    </ons-page>
+  </template>
+  <ons-modal direction="up">
+    <div style="text-align: center">
+      <p>
+        <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+      </p>
+    </div>
+  </ons-modal>
+
+</body>
+
+<script>
+  // run first template 
+  getHomeData();
+  // run array from database
+  runArray();
+  // function select tabbar
+  document.addEventListener('prechange', function (event) {
+    if (event.index == 0) {
+      console.log('Home clicked');
+      // get data for home screen  
+      getHomeData();
+      var modal = document.querySelector('ons-modal');
+      modal.show();
+      setTimeout(function () {
+        modal.hide();
+      }, 1000);
+    } else if (event.index == 1) {
+      console.log('Cart clicked');
+      // get data for cart screen  
+      getprotocart()
+      var modal = document.querySelector('ons-modal');
+      modal.show();
+      setTimeout(function () {
+        modal.hide();
+      }, 1000);
+    } else if (event.index == 2) {
+      var name = localStorage.getItem('name');
+      var item = localStorage.getItem('items');
+      var modal = document.querySelector('ons-modal');
+      modal.show();
+      setTimeout(function () {
+        modal.hide();
+      }, 1000);
+      console.log(name);
+      if (name == null && item == null) {
+        getAllproduct();
+      } else if (name != null && item == null) {
+        getAllproduct(name);
+      } else {
+      }
+      localStorage.clear();
+      // get data for cart screen      
+    }
+  });
+  // function change template
+  function changeTab(name) {
+    document.getElementById('tabslide').setActiveTab(2);
+    localStorage.setItem('name', name);
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    setTimeout(function () {
+      modal.hide();
+    }, 1000);
+  }
+  // function for first template
+  function getHomeData() {
+    var qrcode = localStorage.getItem('code')
+    if( qrcode != null){
+      getproDetail(qrcode);
+      localStorage.clear();
+    }
+    var docRef = db.collection("UI").doc("home");
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        var data = doc.data();
+        $('#appname').html(data.appname);
+        var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+        $('#carousel1').attr('style', style)
+        var icon_template = $('#icon_template').html();
+        console.log(data.categorie);
+        var html = ejs.render(icon_template, { categories: data.categorie });
+        $('#icons').html(html);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+  }
+  // function get All product for second template 
+  function getAllproduct(name, item) {
+    if (name == null) {
+      $('#textP').html("<p><b>&nbsp; All Products </b></p>");
+      var allProductRef = db.collection("PRODUCTS")
+      allProductRef.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          var allP_template = $('#allP_template').html();
+          console.log(querySnapshot);
+          var html = ejs.render(allP_template, { allP: querySnapshot.docs });
+          $('#allP').html(html);
+          console.log(doc.id, " => ", doc.data());
+        });
+      });
+    } else {
+      $('#textP').html("<p><b>&nbsp; You Select Product By Category : </b>" + name + " </p>")
+      localStorage.clear();
+      console.log(name);
+      var allProductRef = db.collection("PRODUCTS").where("category", "==", name)
+      allProductRef.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          var allP_template = $('#allP_template').html();
+          console.log(querySnapshot);
+          var html = ejs.render(allP_template, { allP: querySnapshot.docs });
+          $('#allP').html(html);
+          console.log(doc.id, " => ", doc.data());
+        });
+      });
+    }
+  }
+  // function add product for cart 
+  var dataCart = [];
+  function addprotocart(add2cart) {
+    localStorage.clear('itemdata');
+    localStorage.setItem('itemdata', add2cart);
+    var retrievedData = localStorage.getItem("itemdata");
+    console.log(retrievedData);
+    dataCart.push(retrievedData);
+    ons.notification.toast('Add "' + retrievedData + '" To Cart Success !!!', { timeout: 2000 });
+    $('.alertcart').attr('badge', dataCart.length);
+    console.log(dataCart.length);
+  }
+  // function get total price from cart
+  var priceitem = 0;
+  function totalprice(price1) {
+    var price1 = parseInt(price1, 10)
+    console.log(price1);
+    priceitem = priceitem + price1;
+    $('#showprice').html("<center><p><b>&nbsp; Total Price Is : </b>" + priceitem + " ฿</p></center>");
+  }
+  // funtion delete price form cart
+  function delprice(price2) {
+    var price2 = parseInt(price2, 10)
+    console.log(price2);
+    priceitem = priceitem - price2;
+    $('#showprice').html("<center><p><b>&nbsp; Total Price Is : </b>" + priceitem + " ฿</p></center>");
+  }
+  // function get data to cart
+  function getprotocart() {
+    var numitem = 0;
+    console.log(dataCart);
+    document.getElementById('showDataCart').innerHTML = '';
+    dataCart.forEach(function (dataCart) {
+      var apr = db.collection("PRODUCTS").where("title", "==", dataCart);
+      apr.get().then(function (querySnapshot) {
+        console.log(querySnapshot.docs)
+        var cart_template = $('#cart_template').html();
+        var html = ejs.render(cart_template, { cartData: querySnapshot.docs, numitem: numitem });
+        numitem++
+        $('#showDataCart').append(html);
+      })
+    })
+  }
+  // function show product details
+  function showDetailP() {
+    var dataproduct = localStorage.getItem('getDep');
+    var apr = db.collection("PRODUCTS").where("title", "==", dataproduct);
+    apr.get().then(function (querySnapshot) {
+      var Detailproduct_template = $('#Detailproduct_template').html();
+      var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
+      $('#showDep').html(html);
+    })
+  }
+  //function get product details
+  function getproDetail(getDep) {
+    localStorage.setItem("getDep", getDep)
+    showDetailP();
+    myNavigator.pushPage('detailP.html');
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    setTimeout(function () {
+      modal.hide();
+    }, 1000);
+  }
+  // function search product
+  function search(searchdata) {
+    const filterItems = (needle, heystack) => {
+      let query = needle.toLowerCase();
+      return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
+    }
+    console.log(filterItems(searchdata, data));
+    var item = filterItems(searchdata.toLowerCase(), data);
+    console.log(item)
+    localStorage.setItem('items', item);
+    searchpro(item);
+    document.getElementById('tabslide').setActiveTab(2);
+  }
+  // function run array from firebase
+  const data = [];
+  function runArray() {
+    console.log(search);
+    db.collection("PRODUCTS").get()
+      .then(function (querySnapshot) {
+        querySnapshot.docs.forEach(function (item) {
+          data.push(item)
+          console.log(data)
+        });
+      })
+  }
+  //function show product from search
+  function searchpro(title) {
+    if (title.length == 0) {
+      $('#textP').html("<p><b>&nbsp;There Is Not Product From You Search !!!</b></p>")
+      var allProductRef = db.collection("PRODUCTS")
+      allProductRef.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          var allP_template = $('#allP_template').html();
+          console.log(querySnapshot);
+          var html = ejs.render(allP_template, { allP: querySnapshot.docs });
+          $('#allP').html(html);
+        });
+      });
+    } else {
+      $('#textP').html("<p><b>&nbsp; Number Of Product Is : </b>" + title.length + " From Search</p>")
+      var allP_template = $('#allP_template').html();
+      var html = ejs.render(allP_template, { allP: title });
+      $('#allP').html(html);
+    }
+  }
+  //funtion delete product from cart
+  function delitem(numitem) {
+    var remove = dataCart.splice(numitem, 1)
+    getprotocart()
+    if (dataCart.length == 0) {
+      $('.alertcart').attr('badge', "");
+    } else {
+      $('.alertcart').attr('badge', dataCart.length);
+    }
+  }
+  var showAlert = function () {
+    ons.notification.alert('You Have Successfully Deleted Your Product. !!!');
+  };
+</script>
+
+</html>
